@@ -1,0 +1,47 @@
+﻿@model List<TaskEntityViewModel>
+
+
+<div class="alert alert-danger">
+    Hoşgeldin  @User.Claims.FirstOrDefault(x => x.Type == "email")?.Value
+</div>
+@* eğer ki Claimsta bu id varsa göster . ! *@
+@if (@User.Claims.FirstOrDefault(x => x.Type == "id")?.Value != null)
+{
+    
+
+
+
+<h3 class="text-center">Listeleme Sayfası</h3>
+
+<a asp-action="Add" asp-controller="Task" class="btn btn-primary mt-2 mb-2">Yeni Ekle</a>
+<div class="mt-3">
+
+
+    @foreach (var item in Model)
+    {
+        <div class="card fw-bold">
+
+            <div class="card-header">@item.Title</div>
+
+            <div class="card-body">
+                <p class="card-text">@item.Content</p>
+                <a asp-action="CompleteTask" asp-controller="Task" asp-route-id="@item.Id" class="btn btn-dark">@(item.IsDone == true ? "Görev Tamamlandı" : "Görev Tamamlanmadı") </a>
+                <a asp-controller="Task" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                <a asp-action="CancelTask" asp-controller="Task" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    }
+</div>
+       
+}
+
+
+
+
+
+
+
+
+
+
+

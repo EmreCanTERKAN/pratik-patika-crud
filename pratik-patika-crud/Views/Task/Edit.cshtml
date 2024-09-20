@@ -1,0 +1,34 @@
+﻿@model TaskEditViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h3 class="text-center">Görev Düzenleme Sayfası</h3>
+
+<input type="hidden" asp-for=Id />
+<form method="post" asp-controller="Task" asp-action="Edit">
+
+    <div class="mb-2 form">
+        <label class="form-label">Başlık</label>
+        <input asp-for=Title class="form-control" type="text" />
+        <span asp-validation-for="Title" class="text-danger fw-bold"></span>
+    </div>
+    <div class="mb-2 form">
+        <label class="form-label">İçerik</label>
+        <input asp-for=Content class="form-control" type="text" />
+        <span asp-validation-for="Content" class="text-danger fw-bold"></span>
+    </div>
+    <div class="mb-2 form">
+        <label class="form-label">Görevi Atayan</label>
+        <select asp-for=OwnerId asp-items="@( new SelectList(ViewBag.Owners,"Id","Name") )" class="form-control">
+            <option selected disabled>Seçiniz</option>
+        </select>
+        <span asp-validation-for="OwnerId" class="text-danger fw-bold"></span>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success">Ekle</button>
+
+</form>
